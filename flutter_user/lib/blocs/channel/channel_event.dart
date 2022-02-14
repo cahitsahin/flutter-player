@@ -3,5 +3,6 @@ abstract class ChannelEvent {
 }
 
 class ChannelFetchEvent extends ChannelEvent {
-  const ChannelFetchEvent();
+  final String token;
+  const ChannelFetchEvent(this.token);
 }

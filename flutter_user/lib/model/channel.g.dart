@@ -8,8 +8,8 @@ part of 'channel.dart';
 
 _$_Channel _$_$_ChannelFromJson(Map<String, dynamic> json) {
   return _$_Channel(
-    name: json['name'] as String,
-    url: json['url'] as String,
+    name: json['name'] == null ? 'Untitled' : json['name'] as String,
+    url: json['url'] == null ? 'Untitled' : json['url'] as String,
     createdAt: json['createdAt'] as String,
     id: json['id'] as int,
     updatedAt: json['updatedAt'] as String,

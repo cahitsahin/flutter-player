@@ -37,6 +37,7 @@ dependencies:
   http: ^0.13.4
   freezed_annotation: ^1.1.0
   freezed: ^1.1.1
+  better_player: ^0.0.81
 
 dev_dependencies:
   flutter_test:

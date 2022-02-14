@@ -3,5 +3,6 @@ abstract class SignInEvent {
 }
 
 class SignInFetchEvent extends SignInEvent {
-  const SignInFetchEvent();
+  final String name, password;
+  const SignInFetchEvent(this.name, this.password);
 }

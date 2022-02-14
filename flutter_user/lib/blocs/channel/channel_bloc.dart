@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_user/blocs/channel/channel_event.dart';
 import 'package:flutter_user/blocs/channel/channel_state.dart';
@@ -11,18 +10,21 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
   bool isFetching = false;
 
   ChannelBloc(this.repo) : super(const ChannelInitialState()) {
-    on<ChannelFetchEvent>((event, emit) async => await _signIn(emit));
+    on<ChannelFetchEvent>(
+        (event, emit) async => await _fetchChannels(emit, event.token));
   }
 
-  Future<void> _signIn(Emitter<ChannelState> emit) async {
-    emit(const ChannelLoadingState(message: 'Loading Channel'));
-    final response = await repo.fetchChannels();
-    final channels =
-        (jsonDecode(response) as List).map((e) => Channel.fromJson(e)).toList();
+  Future<void> _fetchChannels(Emitter<ChannelState> emit, String token) async {
+    emit(const ChannelLoadingState(message: 'Loading Channels'));
+    final response = await repo.fetchChannels(token);
     if (response.statusCode == 200) {
+      final channels = (jsonDecode(response.body) as List)
+          .map((e) => Channel.fromJson(e))
+          .toList();
       emit(ChannelSuccessState(channels: channels));
     } else {
-      emit(ChannelErrorState(error: response));
+      emit(ChannelErrorState(
+          error: response.body.toString() + response.statusCode.toString()));
     }
   }
 }

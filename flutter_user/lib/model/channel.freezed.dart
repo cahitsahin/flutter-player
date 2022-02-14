@@ -24,7 +24,7 @@ class _$ChannelTearOff {
 
   _Channel call(
       {required int id,
-      required String name,
+      String name = 'untitled',
       required String lang,
       required String url,
       required String template,
@@ -202,7 +202,7 @@ class __$ChannelCopyWithImpl<$Res> extends _$ChannelCopyWithImpl<$Res>
 class _$_Channel implements _Channel {
   _$_Channel(
       {required this.id,
-      required this.name,
+      this.name = 'untitled',
       required this.lang,
       required this.url,
       required this.template,
@@ -214,6 +214,7 @@ class _$_Channel implements _Channel {
 
   @override // 6. list all the arguments/properties
   final int id;
+  @JsonKey()
   @override
   final String name;
   @override
@@ -271,7 +272,7 @@ class _$_Channel implements _Channel {
 abstract class _Channel implements Channel {
   factory _Channel(
       {required int id,
-      required String name,
+      String name,
       required String lang,
       required String url,
       required String template,
